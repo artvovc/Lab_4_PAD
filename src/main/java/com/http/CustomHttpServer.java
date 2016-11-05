@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.String.format;
-
+/**
+ * Created by Artemie on 05.11.2016.
+ */
 public class CustomHttpServer {
 
     private static final Logger LOGGER = Logger.getLogger(CustomHttpServer.class);

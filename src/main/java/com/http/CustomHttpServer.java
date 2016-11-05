@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.String.format;
+
 /**
  * Created by Artemie on 05.11.2016.
  */
@@ -39,7 +40,7 @@ public class CustomHttpServer {
     private static class PostHandler implements HttpHandler {
         public void handle(HttpExchange httpExchange) {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
-                    httpExchange.getRemoteAddress(),httpExchange.getRequestMethod(),httpExchange.getRequestURI()));
+                    httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));
             try {
                 InputStream is = httpExchange.getRequestBody();
                 StringWriter writer = new StringWriter();
@@ -50,7 +51,7 @@ public class CustomHttpServer {
                 String response = "This id is used";
                 int status = 500;
 
-                File file = new File("/home/win/Workspace/Untitled Folder/src/main/resources/db.json");
+                File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 InputStream inputStream = new FileInputStream(file);
                 writer = new StringWriter();
                 IOUtils.copy(inputStream, writer, "UTF-8");
@@ -94,7 +95,7 @@ public class CustomHttpServer {
     private static class PutHandler implements HttpHandler {
         public void handle(HttpExchange httpExchange) {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
-                    httpExchange.getRemoteAddress(),httpExchange.getRequestMethod(),httpExchange.getRequestURI()));
+                    httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));
             try {
                 InputStream is = httpExchange.getRequestBody();
                 StringWriter writer = new StringWriter();
@@ -105,7 +106,7 @@ public class CustomHttpServer {
                 String response = "Cannot update employee maybe is not exists";
                 int status = 500;
 
-                File file = new File("/home/win/Workspace/Untitled Folder/src/main/resources/db.json");
+                File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 InputStream inputStream = new FileInputStream(file);
                 writer = new StringWriter();
                 IOUtils.copy(inputStream, writer, "UTF-8");
@@ -154,9 +155,9 @@ public class CustomHttpServer {
     private static class GetHandler implements HttpHandler {
         public void handle(HttpExchange httpExchange) {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
-                    httpExchange.getRemoteAddress(),httpExchange.getRequestMethod(),httpExchange.getRequestURI()));
+                    httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));
             try {
-                File file = new File("/home/win/Workspace/Untitled Folder/src/main/resources/db.json");
+                File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 byte[] bytearray = new byte[(int) file.length()];
                 FileInputStream fis = new FileInputStream(file);
                 BufferedInputStream bis = new BufferedInputStream(fis);
@@ -185,7 +186,7 @@ public class CustomHttpServer {
     private static class GetByIdHandler implements HttpHandler {
         public void handle(HttpExchange httpExchange) {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
-                    httpExchange.getRemoteAddress(),httpExchange.getRequestMethod(),httpExchange.getRequestURI()));
+                    httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));
             try {
                 Headers h = httpExchange.getResponseHeaders();
                 h.add("Content-Type", "application/json");
@@ -201,7 +202,7 @@ public class CustomHttpServer {
                     values.put(varAndValue[0], Integer.parseInt(varAndValue[1]));
                 }
 
-                File file = new File("/home/win/Workspace/Untitled Folder/src/main/resources/db.json");
+                File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 InputStream inputStream = new FileInputStream(file);
                 StringWriter writer = new StringWriter();
                 IOUtils.copy(inputStream, writer, "UTF-8");

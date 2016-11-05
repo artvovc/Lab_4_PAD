@@ -154,9 +154,6 @@ public class CustomHttpServer {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
                     httpExchange.getRemoteAddress(),httpExchange.getRequestMethod(),httpExchange.getRequestURI()));
             try {
-                Headers h = httpExchange.getResponseHeaders();
-                h.add("Content-Type", "application/json");
-
                 File file = new File("/home/win/Workspace/Untitled Folder/src/main/resources/db.json");
                 byte[] bytearray = new byte[(int) file.length()];
                 FileInputStream fis = new FileInputStream(file);

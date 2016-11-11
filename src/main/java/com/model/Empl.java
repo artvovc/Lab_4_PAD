@@ -1,5 +1,8 @@
 package com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.bson.Document;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,17 +13,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "empl")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Empl {
-    private Integer id;
     private String firstname;
     private String lastname;
     private Integer age;
     private Integer salary;
     private Long createdDate;
 
-    public Empl(){}
+    public Empl() {
+    }
 
-    public Empl(Integer id, String firstname, String lastname, Integer age, Integer salary, Long createdDate) {
-        this.id = id;
+    public Empl(String firstname, String lastname, Integer age, Integer salary, Long createdDate) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
@@ -28,17 +30,17 @@ public class Empl {
         this.createdDate = createdDate;
     }
 
+    public Empl(Document document) {
+        this.firstname = document.getString("firstname");
+        this.lastname = document.getString("lastname");
+        this.age = document.getInteger("age");
+        this.salary = document.getInteger("salary");
+        this.createdDate = document.getLong("createdDate");
+    }
+
     @Override
     public String toString() {
-        return "com.model.Empl ( id="+id+", firstname="+firstname+", lastname"+lastname+", age="+age+", salary="+salary+", createdDate="+createdDate+");";
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        return "com.model.Empl ( firstname=" + firstname + ", lastname" + lastname + ", age=" + age + ", salary=" + salary + ", createdDate=" + createdDate + ");";
     }
 
     public String getFirstname() {
@@ -79,5 +81,15 @@ public class Empl {
 
     public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @JsonIgnore
+    public Document getDocument() {
+        return new Document()
+                .append("firstname", this.firstname)
+                .append("lastname", this.lastname)
+                .append("age", this.age)
+                .append("salary", this.salary)
+                .append("createdDate", this.createdDate);
     }
 }

@@ -3,6 +3,8 @@ package com.http;
 import com.database.DataBase;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.model.Empl;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -31,7 +33,7 @@ public class CustomHttpServer {
         server.createContext("/employee/post", new PostHandler());
         server.createContext("/employee/get", new GetHandler());
         server.createContext("/employee/put", new PutHandler());
-        server.createContext("/employee", new GetByIdHandler());
+        server.createContext("/employee", new GetByOffsetAndLimitHandler());
         server.setExecutor(null);
         server.start();
         LOGGER.info("[SERVER] --> WAS STARTED SERVER");
@@ -50,6 +52,10 @@ public class CustomHttpServer {
                 Empl empl = (Empl) JSONUtil.getJAVAObjectfromJSONString(requestBody, Empl.class);
                 String response = "This id is used";
                 int status = 500;
+
+                MongoClient mongoClient = new MongoClient();
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("test");
+                mongoDatabase.createCollection("table");
 
                 File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 InputStream inputStream = new FileInputStream(file);
@@ -157,6 +163,9 @@ public class CustomHttpServer {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
                     httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));
             try {
+                Headers h = httpExchange.getResponseHeaders();
+                h.add("Content-Type", "application/json");
+
                 File file = new File("A:\\WorkSpace\\(PAD) laboratory\\Lab 5 PAD\\lab5pad\\src\\main\\resources\\db.json");
                 byte[] bytearray = new byte[(int) file.length()];
                 FileInputStream fis = new FileInputStream(file);
@@ -183,7 +192,7 @@ public class CustomHttpServer {
         }
     }
 
-    private static class GetByIdHandler implements HttpHandler {
+    private static class GetByOffsetAndLimitHandler implements HttpHandler {
         public void handle(HttpExchange httpExchange) {
             LOGGER.info(format("[SERVER] --> Somebody access services: remote address = %s, request method = %s, request uri = %s",
                     httpExchange.getRemoteAddress(), httpExchange.getRequestMethod(), httpExchange.getRequestURI()));

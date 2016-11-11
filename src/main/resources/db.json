@@ -1,1 +1,26 @@
-[{"id":0,"firstname":"Artiom","lastname":"Vovc","age":19,"salary":100000,"createdDate":0},{"id":1,"firstname":"Artiom","lastname":"Vovc","age":19,"salary":100000,"createdDate":0}]
+[
+  {
+    "id": 0,
+    "firstname": "Artiom",
+    "lastname": "Vovc",
+    "age": 19,
+    "salary": 100000,
+    "createdDate": 0
+  },
+  {
+    "id": 1,
+    "firstname": "Artemie",
+    "lastname": "Vo",
+    "age": 22,
+    "salary": 12400,
+    "createdDate": 0
+  },
+  {
+    "id": 3,
+    "firstname": "Vovc",
+    "lastname": "ArtiomTest",
+    "age": 10,
+    "salary": 4151524,
+    "createdDate": 0
+  }
+]
